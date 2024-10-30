@@ -50,5 +50,13 @@ class UserRepository:
         self.cursor.execute("SELECT * FROM users WHERE age != ?", (age,))
         return self.cursor.fetchall()
 
+    def count(self):
+        self.cursor.execute("SELECT COUNT(*) FROM users")
+        return self.cursor.fetchone()[0]
+
+    def get_total_balance(self):
+        self.cursor.execute("SELECT SUM(balance) FROM users")
+        return self.cursor.fetchone()[0]
+
     def close(self):
         self.connection.close()
